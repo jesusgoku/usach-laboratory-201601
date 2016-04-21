@@ -8,18 +8,20 @@
 #define __LETTERSOUP_H__
 
 // -- Constants
-// This is other comment
+A
+#define LS_MIN_BOARD_W_SIZE 10
+#define LS_MIN_BOARD_H_SIZE 10
 
 // -- Data Structures
+
+typedef char ** BoardGrid;
+typedef char * BoardRow;
+typedef char BoardCell;
 
 typedef struct {
     int w;
     int h;
-} BoardSize;
-
-typedef struct {
-    BoardSize size;
-    
+    BoardGrid board;
 } Board;
 
 typedef struct {
@@ -27,13 +29,27 @@ typedef struct {
 } Game;
 
 typedef struct {
-
+    int row;
+    int col;
 } Position;
+
+typedef enum code {
+    OK,
+    ERR_FILE_NOT_FOUND,
+    ERR_FILE_NOT_PERMISSION,
+    ERR_ILEGAL_BOARD_SIZE
+} code;
 
 // -- Function Prototipes
 
-typedef enum code {OK, ERR_FILE_NOT_FOUND, ERR_FILE_NOT_PERMISSION} code;
-
+/**
+ * Create board with sizes
+ * @param  w          width of board
+ * @param  h          height of board
+ * @param  difficulty difficult of board
+ * @param  statusCode pointer to write an error status code
+ * @return            pointer to new board
+ */
 Board *createBoard(int w, int h, int difficulty, code *statusCode);
 
 void saveBoard(Board *board, int *id, code *statusCode);
