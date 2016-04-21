@@ -1,1 +1,5 @@
-*.out
+output/*
+!.gitkeep
+*.o
+main
+!main.c
