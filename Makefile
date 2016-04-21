@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I./libs -std=c99
-DEPS = libs/*.h
-OBJ = main.o libs/*.o
+DEPS = libs/lettersoup.h
+OBJ = main.o libs/lettersoup.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
