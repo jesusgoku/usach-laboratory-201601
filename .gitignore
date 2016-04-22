@@ -1,4 +1,5 @@
 output/*
+saved_games/*
 !.gitkeep
 *.o
 main
