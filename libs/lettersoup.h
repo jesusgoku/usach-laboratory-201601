@@ -41,7 +41,8 @@ typedef enum code {
     OK,
     ERR_FILE_NOT_FOUND,
     ERR_FILE_NOT_PERMISSION,
-    ERR_ILEGAL_BOARD_SIZE
+    ERR_ILEGAL_BOARD_SIZE,
+    ERR_NO_MEMORY_ALLOCATE
 } code;
 
 // -- Function Prototipes
