@@ -76,6 +76,11 @@ void saveBoard(Board *board, int *id, code *statusCode)
     *statusCode = OK;
 }
 
+Board *loadBoard(int id, code *statusCode)
+{
+
+}
+
 /**
  * Create empty board
  *
