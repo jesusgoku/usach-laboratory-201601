@@ -15,4 +15,4 @@ start:
 	./main
 
 clean:
-	rm -f main.o libs/*.o main
+	rm -f main.o libs/*.o main saved_games/*.txt
