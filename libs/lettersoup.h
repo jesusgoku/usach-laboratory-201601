@@ -7,6 +7,13 @@
 #ifndef __LETTERSOUP_H__
 #define __LETTERSOUP_H__
 
+// -- Includes
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
+
 // -- Constants
 
 #define LS_MIN_BOARD_W_SIZE 10
@@ -59,6 +66,13 @@ typedef enum code {
  */
 Board *createBoard(int w, int h, int difficulty, code *statusCode);
 
+/**
+ * Save board to a file
+ *
+ * @param board      board to persist
+ * @param id         ID of board
+ * @param statusCode pointer ti write an error status code
+ */
 void saveBoard(Board *board, int *id, code *statusCode);
 
 Board *loadBoard(int id, code *statusCode);
@@ -91,5 +105,21 @@ int getScore(Game *game);
  * @return            pointer to new board
  */
 Board *createEmptyBoard(int w, int h, code *statusCode);
+
+/**
+ * Print to stdout board
+ *
+ * @param board board to print
+ */
+void printBoard(Board *board);
+
+/**
+ * Check if file exists
+ *
+ * @param  filename file name to check
+ *
+ * @return          true if file exists
+ */
+bool file_exists(const char * filename);
 
 #endif // __LETTERSOUP_H__

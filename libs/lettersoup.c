@@ -1,4 +1,7 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
 
 #include "lettersoup.h"
 
@@ -20,7 +23,57 @@ Board *createBoard(int w, int h, int difficulty, code *statusCode)
         return NULL;
     }
 
+    for (int j = 0; j < board->h; ++j) {
+        for (int k = 0; k < board->w; ++k) {
+            board->board[j][k] = ' ';
+        }
+    }
+
+    *statusCode = OK;
+
     return board;
+}
+
+/**
+ * Save board to a file
+ *
+ * @param board      board to persist
+ * @param id         pointer to write id of saved files
+ * @param statusCode pointer to write an error status code
+ */
+void saveBoard(Board *board, int *id, code *statusCode)
+{
+    FILE *fp;
+    int generatedID;
+    char filePath[100];
+
+    srand(time(NULL));
+
+    do {
+        generatedID = rand();
+        sprintf(filePath, "saved_games/%d.%s", generatedID, "txt");
+    } while (file_exists(filePath));
+
+    fp = fopen(filePath, "w");
+
+    if (NULL == fp) {
+        *statusCode = ERR_FILE_NOT_FOUND;
+        return;
+    }
+
+    fprintf(fp, "%d %d\n", board->w, board->h);
+
+    for (int j = 0; j < board->h; ++j) {
+        for (int k = 0; k < board->w; ++k) {
+            fprintf(fp, "%c ", board->board[j][k]);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+
+    *id = generatedID;
+    *statusCode = OK;
 }
 
 /**
@@ -59,7 +112,7 @@ Board *createEmptyBoard(int w, int h, code *statusCode)
         return NULL;
     }
 
-    for (int k = 0; k < w; ++k) {
+    for (int k = 0; k < h; ++k) {
         boardGrid[k] = (BoardRow) malloc(sizeof(BoardCell) * w);
 
         if (NULL == boardGrid[k]) {
@@ -70,5 +123,41 @@ Board *createEmptyBoard(int w, int h, code *statusCode)
 
     board->board = boardGrid;
 
+    *statusCode = OK;
+
     return board;
+}
+
+/**
+ * Print to stdout board
+ *
+ * @param board board to print
+ */
+void printBoard(Board *board)
+{
+    for (int j = 0; j < board->h; ++j) {
+        for (int k = 0; k < board->w; ++k) {
+            printf("%c ", board->board[j][k]);
+        }
+        printf("\n");
+    }
+}
+
+/**
+ * Check if file exists
+ *
+ * @param  filename file name to check
+ *
+ * @return          true if file exists
+ */
+bool file_exists(const char *filename)
+{
+    FILE *fp = fopen(filename, "r");
+
+    if (NULL != fp) {
+        fclose(fp);
+        return true;
+    }
+
+    return false;
 }
