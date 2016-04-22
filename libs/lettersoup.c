@@ -4,13 +4,35 @@
 
 /**
  * Create board with sizes
+ *
  * @param  w          width of board
  * @param  h          height of board
  * @param  difficulty difficult of board
  * @param  statusCode pointer to write an error status code
+ *
  * @return            pointer to new board
  */
 Board *createBoard(int w, int h, int difficulty, code *statusCode)
+{
+    Board *board = createEmptyBoard(w, h, statusCode);
+
+    if (NULL == board || OK != *statusCode) {
+        return NULL;
+    }
+
+    return board;
+}
+
+/**
+ * Create empty board
+ *
+ * @param  w          width of board
+ * @param  h          height of board
+ * @param  statusCode pointer to write an error status code
+ *
+ * @return            pointer to new board
+ */
+Board *createEmptyBoard(int w, int h, code *statusCode)
 {
     Board *board = NULL;
     BoardGrid boardGrid = NULL;

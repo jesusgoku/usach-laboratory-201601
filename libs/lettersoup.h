@@ -45,14 +45,16 @@ typedef enum code {
     ERR_NO_MEMORY_ALLOCATE
 } code;
 
-// -- Function Prototipes
+// -- Function Prototypes (Obligatory)
 
 /**
  * Create board with sizes
+ *
  * @param  w          width of board
  * @param  h          height of board
  * @param  difficulty difficult of board
  * @param  statusCode pointer to write an error status code
+ *
  * @return            pointer to new board
  */
 Board *createBoard(int w, int h, int difficulty, code *statusCode);
@@ -76,5 +78,18 @@ void saveGameHistory(Game *game, int *id, code *statusCode);
 Game *loadGameHistory(int id, code *statusCode);
 
 int getScore(Game *game);
+
+// -- Function Prototypes (Utilities)
+
+/**
+ * Create empty board
+ *
+ * @param  w          width of board
+ * @param  h          height of board
+ * @param  statusCode pointer to write an error status code
+ *
+ * @return            pointer to new board
+ */
+Board *createEmptyBoard(int w, int h, code *statusCode);
 
 #endif // __LETTERSOUP_H__
