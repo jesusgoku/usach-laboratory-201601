@@ -8,9 +8,13 @@
 #define __LETTERSOUP_H__
 
 // -- Constants
-A
+
 #define LS_MIN_BOARD_W_SIZE 10
 #define LS_MIN_BOARD_H_SIZE 10
+
+#define LS_DIFFICULT_EASY 0
+#define LS_DIFFICULT_MEDIUM 1
+#define LS_DIFFICULT_HARD 2
 
 // -- Data Structures
 
